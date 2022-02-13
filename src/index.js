@@ -1,5 +1,5 @@
 import { Enemy } from './enemy';
-import './cursor-event';
+import './components';
 setTimeout(() => {
   const enemy = new Enemy();
   enemy.init();
