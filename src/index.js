@@ -1,7 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import 'aframe';
-// import './index.css';
-import App from './App';
-
-ReactDOM.render(<App />, document.getElementById('root'));
+import { Enemy } from './enemy';
+import './cursor-event';
+setTimeout(() => {
+  const enemy = new Enemy();
+  enemy.init();
+  enemy.attack();
+}, 1000);
