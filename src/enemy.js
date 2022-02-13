@@ -1,4 +1,5 @@
 import { enemies } from './constant';
+import { updateGameHP } from './global';
 // scene
 const scene = document.querySelector('a-scene');
 
@@ -13,7 +14,10 @@ export class Enemy {
   init() {
     // 挂载实体
     scene?.appendChild(this.entity);
-    this.attackTimer = setInterval(() => this.attack(), 5000);
+    this.attackTimer = setInterval(
+      () => this.attack(),
+      this.person.attack.delay * 1000
+    );
   }
 
   // 生成实体
@@ -37,6 +41,9 @@ export class Enemy {
     const attackEntity = this.createAttackEntity();
     scene?.appendChild(attackEntity);
     const timer = setTimeout(() => {
+      // @ts-ignore
+      window.game_hp -= this.person.attack.hurt;
+      updateGameHP();
       scene?.removeChild(attackEntity);
       clearTimeout(timer);
     }, 1000);
