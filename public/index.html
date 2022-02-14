@@ -61,8 +61,44 @@
           id="korrigan-wolf-attack"
           src="https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/beach-ball/model.gltf"
         ></a-asset-item>
-      </a-assets>
+        <!-- 个人武器 -->
+        <a-asset-item
+          id="weapon"
+          src="https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/blaster/model.gltf"
+        ></a-asset-item>
+        <!-- 音频 -->
+        <audio
+          id="shooting-sound"
+          src="https://audio-1300099782.cos.ap-beijing.myqcloud.com/shooting.mp3"
+          preload="auto"
+        ></audio>
+        <audio
+          id="hit-sound"
+          src="https://audio-1300099782.cos.ap-beijing.myqcloud.com/hit.mp3"
+          preload="auto"
+        ></audio>
+        <audio
+          id="enemy-death-sound"
+          src="https://audio-1300099782.cos.ap-beijing.myqcloud.com/enemy-death.mp3"
+          preload="auto"
+        ></audio>
+        <audio
+          id="enemy-appear-sound"
+          src="https://audio-1300099782.cos.ap-beijing.myqcloud.com/enemy-appear.wav"
+          preload="auto"
+        ></audio>
+        <audio
+          id="gameover-sound"
+          src="https://audio-1300099782.cos.ap-beijing.myqcloud.com/gameover.mp3"
+          preload="auto"
+        ></audio>
 
+        <!-- <audio
+          src="https://image-1300099782.cos.ap-beijing.myqcloud.com/audio/8335.mp3"
+          autoplay
+          preload
+        ></audio> -->
+      </a-assets>
       <a-box
         height="20"
         width="30"
@@ -70,56 +106,78 @@
         position="0 0 -20"
         src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2Ffed677aa88ffbc874a7ce77dadee1cb0a07c9434137f6-SFOA1y_fw658&refer=http%3A%2F%2Fhbimg.b0.upaiyun.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1647355019&t=85b3bbe305f5c7562dafbb1d7cfaf4f9"
       ></a-box>
+
+      <a-text
+        id="start-text"
+        value="Start"
+        color="#BBB"
+        position="-3 6 -18"
+        scale="10 10 10"
+        font="mozillavr"
+        start-focus
+      ></a-text>
+      <a-text
+        id="end-text"
+        value=""
+        color="red"
+        position="-5.5 9 -18"
+        scale="10 10 10"
+        font="mozillavr"
+      ></a-text>
+      <a-text
+        id="restart-text"
+        value="Restart"
+        color="#BBB"
+        position="-4 3 -18"
+        scale="10 10 10"
+        font="mozillavr"
+        restart-focus
+      ></a-text>
       <a-text
         id="hp-text"
-        value="HP"
+        value=""
         color="#BBB"
-        position="-8 8 -18"
+        position="-4 9 -18"
+        scale="10 10 10"
+        font="mozillavr"
+      ></a-text>
+      <a-text
+        id="score-text"
+        value=""
+        color="#BBB"
+        position="-5 6 -18"
         scale="10 10 10"
         font="mozillavr"
       ></a-text>
 
-      <!-- <a-gltf-model
-        src="#korrigan-hat"
-        position="0 0 -5"
-        scale="4 4 4"
-      ></a-gltf-model>
-      <a-gltf-model
-        src="#old-korrigan"
-        position="0 0 7"
-        scale="4.3 4.3 4.3"
-      ></a-gltf-model>
-      <a-gltf-model
-        src="#druid"
-        position="3 0 -4"
-        scale="1.3 1.3 1.3"
-      ></a-gltf-model>
-      <a-gltf-model
-        src="#korrigan-taning"
-        position="-2 0 5"
-        scale="4 4 4 "
-      ></a-gltf-model>
-      <a-gltf-model
-        src="#young-korrigan"
-        position="2 0 7"
-        scale="4 4 4"
-      ></a-gltf-model>
-      <a-gltf-model
-        src="#korrigan-wolf"
-        position="5 0 2"
-        scale="3 3 3"
-      ></a-gltf-model> -->
+      <a-entity
+        sound="src: #enemy-death-sound"
+        id="enemy_death_sound_player"
+        position="0 0 0"
+        poolSize="10"
+      ></a-entity>
+      <a-entity
+        sound="src: #gameover-sound"
+        id="gameover_sound_player"
+        position="0 0 0"
+        poolSize="10"
+      ></a-entity>
 
-      <!-- <a-sphere
-        radius="0.1"
-        color="red"
-        geometry=""
-        material=""
-        position="0 2 -10"
-        animation="property: position; dur: 2000; to: 0 1.5 0;"
-      ></a-sphere> -->
       <a-camera>
         <a-cursor color="#FAFAFA" cursor-listener></a-cursor>
+        <a-gltf-model
+          id="_weapon"
+          src="#weapon"
+          position="0.5 -0.5 -0.8"
+          scale="1 1 1"
+          rotation="0 180 0"
+        ></a-gltf-model>
+        <a-entity
+          sound="src: #shooting-sound"
+          id="shooting_sound_player"
+          position="0.5 -0.5 -0.8"
+          poolSize="10"
+        ></a-entity>
       </a-camera>
     </a-scene>
   </body>

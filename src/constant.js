@@ -1,4 +1,4 @@
-export const enemies = [
+export const Enemies = [
   {
     name: 'druid',
     scale: '1.3 1.3 1.3',
@@ -8,6 +8,7 @@ export const enemies = [
       delay: 9,
     },
     hp: 60,
+    score: 8,
   },
   {
     name: 'korrigan-hat',
@@ -18,6 +19,7 @@ export const enemies = [
       delay: 7,
     },
     hp: 50,
+    score: 6,
   },
   {
     name: 'ankou-with-cart',
@@ -28,6 +30,7 @@ export const enemies = [
       delay: 8,
     },
     hp: 100,
+    score: 10,
   },
   {
     name: 'witch',
@@ -38,6 +41,7 @@ export const enemies = [
       delay: 5,
     },
     hp: 40,
+    score: 5,
   },
   {
     name: 'bear',
@@ -48,6 +52,7 @@ export const enemies = [
       delay: 5,
     },
     hp: 60,
+    score: 7,
   },
   {
     name: 'korrigan-wolf',
@@ -58,5 +63,10 @@ export const enemies = [
       delay: 6,
     },
     hp: 80,
+    score: 7,
   },
 ];
+
+export const Hurt = 15; // 角色攻击伤害
+export const AttackDelay = 300; // 角色攻击间隔
+export const EnemyGenerateDelay = 3000; // 敌人生成间隔

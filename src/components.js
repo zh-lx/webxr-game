@@ -1,23 +1,11 @@
 // @ts-nocheck
-const scene = document.querySelector('a-scene');
-
-const attack = function (position) {
-  const circle = document.createElement('a-sphere');
-  circle.setAttribute('radius', '0.2');
-  circle.setAttribute('color', 'red');
-  circle.setAttribute('position', '0 1 0');
-  circle.setAttribute(
-    'animation',
-    `property: position; dur: 300; to: ${position.x} ${position.y} ${position.z};`
-  );
-  scene.appendChild(circle);
-};
+import { attack } from './attack';
 
 AFRAME.registerComponent('cursor-listener', {
   schema: {},
 
   init: function () {
-    // Do something when component first attached.
+    // 点击进行攻击
     this.el.addEventListener('click', function (evt) {
       attack(evt.detail.intersection.point);
     });
@@ -42,10 +30,10 @@ AFRAME.registerComponent('can-be-attacked', {
   init: function () {
     // Do something when component first attached.
     this.el.addEventListener('mouseenter', () => {
-      window.enemy_can_be_attacked = this.el;
+      window.CursorFocusEntity = this.el;
     });
     this.el.addEventListener('mouseleave', () => {
-      window.enemy_can_be_attacked = null;
+      window.CursorFocusEntity = null;
     });
   },
 
@@ -59,5 +47,50 @@ AFRAME.registerComponent('can-be-attacked', {
 
   tick: function (time, timeDelta) {
     // Do something on every scene tick or frame.
+  },
+});
+
+AFRAME.registerComponent('start-focus', {
+  init: function () {
+    this.el.addEventListener('mouseenter', function () {
+      if (window.startLeaveTimer) {
+        clearTimeout(window.startLeaveTimer);
+        window.startLeaveTimer = null;
+      }
+      window.CursorFocusEntity = 'start';
+      this.setAttribute('scale', '12 12 12');
+      this.setAttribute('color', 'orange');
+    });
+
+    this.el.addEventListener('mouseleave', function () {
+      window.startLeaveTimer = setTimeout(() => {
+        window.CursorFocusEntity = null;
+        this.setAttribute('scale', '10 10 10');
+        this.setAttribute('color', '#bbb');
+      }, 500);
+    });
+  },
+});
+
+AFRAME.registerComponent('restart-focus', {
+  init: function () {
+    this.el.addEventListener('mouseenter', function () {
+      console.log(111);
+      if (window.restartLeaveTimer) {
+        clearTimeout(window.restartLeaveTimer);
+        window.restartLeaveTimer = null;
+      }
+      window.CursorFocusEntity = 'restart';
+      this.setAttribute('scale', '12 12 12');
+      this.setAttribute('color', 'orange');
+    });
+
+    this.el.addEventListener('mouseleave', function () {
+      window.restartLeaveTimer = setTimeout(() => {
+        window.CursorFocusEntity = null;
+        this.setAttribute('scale', '10 10 10');
+        this.setAttribute('color', '#bbb');
+      }, 500);
+    });
   },
 });

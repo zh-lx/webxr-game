@@ -1,19 +1,32 @@
-import { enemies } from './constant';
-import { updateGameHP } from './global';
+import { Enemies, Hurt } from './constant';
+import { updateGameHP, updateGameScore, endGame } from './game';
 // scene
 const scene = document.querySelector('a-scene');
+
+const enemyDeathSound = document.querySelector('#enemy_death_sound_player');
 
 export class Enemy {
   constructor() {
     this.person = createRandomEnemy();
     this.location = createRandomLocation();
     this.entity = this.createEntity();
+    this.sounds = {
+      hit: this.createShootSound(),
+      appear: this.createAppearSound(),
+    };
     this.attackTimer = null;
+    this.destroyed = false;
   }
 
   init() {
     // 挂载实体
+    this.entity.appendChild(this.sounds.hit);
+    this.entity.appendChild(this.sounds.appear);
     scene?.appendChild(this.entity);
+    setTimeout(() => {
+      // @ts-ignore
+      this.sounds.appear.components.sound.playSound();
+    }, 0);
     this.attackTimer = setInterval(
       () => this.attack(),
       this.person.attack.delay * 1000
@@ -34,8 +47,25 @@ export class Enemy {
       `${this.location.degX} ${this.location.degY} ${this.location.degZ}`
     );
     entity.setAttribute('can-be-attacked', '');
-    entity.setAttribute('person', JSON.stringify(this.person));
+    // @ts-ignore
+    window.EnemyMap.set(entity, this);
     return entity;
+  }
+
+  // 创建声音
+  createShootSound() {
+    const sound = document.createElement('a-entity');
+    sound.setAttribute('sound', 'src: #hit-sound');
+    sound.setAttribute('position', '0 0 0');
+    sound.setAttribute('poolSize', '10');
+    return sound;
+  }
+  createAppearSound() {
+    const sound = document.createElement('a-entity');
+    sound.setAttribute('sound', 'src: #enemy-appear-sound');
+    sound.setAttribute('position', '0 0 0');
+    sound.setAttribute('poolSize', '10');
+    return sound;
   }
 
   // 攻击
@@ -44,11 +74,37 @@ export class Enemy {
     scene?.appendChild(attackEntity);
     const timer = setTimeout(() => {
       // @ts-ignore
-      window.game_hp -= this.person.attack.hurt;
+      if (window.GameHP <= 0) {
+        return;
+      }
+      // @ts-ignore
+      window.GameHP -= this.person.attack.hurt;
       updateGameHP();
+      // @ts-ignore
+      if (window.GameHP <= 0) {
+        endGame();
+      }
       scene?.removeChild(attackEntity);
       clearTimeout(timer);
     }, 1000);
+  }
+
+  // 被攻击
+  beAttacked() {
+    if (this.destroyed) {
+      return;
+    }
+    // @ts-ignore
+    this.sounds.hit.components.sound.playSound();
+    this.person.hp -= Hurt;
+    if (this.person.hp <= 0) {
+      // @ts-ignore
+      enemyDeathSound.components.sound.playSound();
+      this.destroy();
+      // @ts-ignore
+      window.GameScore += this.person.score;
+      updateGameScore();
+    }
   }
 
   // 生成攻击实体
@@ -70,12 +126,24 @@ export class Enemy {
     );
     return entity;
   }
+
+  // 销毁
+  destroy() {
+    this.destroyed = true;
+    if (this.attackTimer) {
+      clearInterval(this.attackTimer);
+      this.attackTimer = null;
+    }
+    // @ts-ignore
+    window.EnemyMap.delete(this.entity);
+    scene?.removeChild(this.entity);
+  }
 }
 
 // 生成随机敌人
 const createRandomEnemy = () => {
-  const index = Math.floor(Math.random() * enemies.length);
-  return JSON.parse(JSON.stringify(enemies[index]));
+  const index = Math.floor(Math.random() * Enemies.length);
+  return JSON.parse(JSON.stringify(Enemies[index]));
 };
 
 // 生成随机位置

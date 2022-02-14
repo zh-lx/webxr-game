@@ -1,7 +1,3 @@
-import { Enemy } from './enemy';
+import './global';
 import './components';
-setTimeout(() => {
-  const enemy = new Enemy();
-  enemy.init();
-  enemy.attack();
-}, 1000);
+import './game';
