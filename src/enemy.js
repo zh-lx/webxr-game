@@ -34,6 +34,7 @@ export class Enemy {
       `${this.location.degX} ${this.location.degY} ${this.location.degZ}`
     );
     entity.setAttribute('can-be-attacked', '');
+    entity.setAttribute('person', JSON.stringify(this.person));
     return entity;
   }
 
@@ -74,7 +75,7 @@ export class Enemy {
 // 生成随机敌人
 const createRandomEnemy = () => {
   const index = Math.floor(Math.random() * enemies.length);
-  return enemies[index];
+  return JSON.parse(JSON.stringify(enemies[index]));
 };
 
 // 生成随机位置

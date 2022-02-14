@@ -1,10 +1,25 @@
+// @ts-nocheck
+const scene = document.querySelector('a-scene');
+
+const attack = function (position) {
+  const circle = document.createElement('a-sphere');
+  circle.setAttribute('radius', '0.2');
+  circle.setAttribute('color', 'red');
+  circle.setAttribute('position', '0 1 0');
+  circle.setAttribute(
+    'animation',
+    `property: position; dur: 300; to: ${position.x} ${position.y} ${position.z};`
+  );
+  scene.appendChild(circle);
+};
+
 AFRAME.registerComponent('cursor-listener', {
   schema: {},
 
   init: function () {
     // Do something when component first attached.
     this.el.addEventListener('click', function (evt) {
-      console.log(evt);
+      attack(evt.detail.intersection.point);
     });
   },
 
@@ -27,10 +42,10 @@ AFRAME.registerComponent('can-be-attacked', {
   init: function () {
     // Do something when component first attached.
     this.el.addEventListener('mouseenter', () => {
-      console.log('can be attack');
+      window.enemy_can_be_attacked = this.el;
     });
     this.el.addEventListener('mouseleave', () => {
-      console.log('cant be attack');
+      window.enemy_can_be_attacked = null;
     });
   },
 
