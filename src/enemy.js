@@ -33,6 +33,7 @@ export class Enemy {
       'rotation',
       `${this.location.degX} ${this.location.degY} ${this.location.degZ}`
     );
+    entity.setAttribute('can-be-attacked', '');
     return entity;
   }
 
