@@ -69,4 +69,4 @@ export const Enemies = [
 
 export const Hurt = 15; // 角色攻击伤害
 export const AttackDelay = 300; // 角色攻击间隔
-export const EnemyGenerateDelay = 3000; // 敌人生成间隔
+export const EnemyGenerateDelay = 10000; // 敌人生成间隔
