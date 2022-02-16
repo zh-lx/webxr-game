@@ -11,60 +11,61 @@
   <body>
     <a-scene environment="preset: forest;">
       <a-assets timeout="30000">
+        <img
+          id="wallImg"
+          src="https://image-1300099782.cos.ap-beijing.myqcloud.com/wall.jpeg"
+        />
         <!-- 敌人相关资源 -->
-        <a-asset-item
-          id="druid"
-          src="https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/druid/model.gltf"
-        ></a-asset-item>
+        <a-asset-item id="druid" src=""></a-asset-item>
         <a-asset-item
           id="korrigan-hat"
-          src="https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/korrigan-hat/model.gltf"
+          src="https://gltf-1300099782.cos.ap-beijing.myqcloud.com/korrigan-hat.gltf"
         ></a-asset-item>
         <a-asset-item
           id="ankou-with-cart"
-          src="https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/ankou-with-cart/model.gltf"
+          src="https://gltf-1300099782.cos.ap-beijing.myqcloud.com/ankou-with-cart.gltf"
         ></a-asset-item>
         <a-asset-item
           id="witch"
-          src="https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/witch/model.gltf"
+          src="https://gltf-1300099782.cos.ap-beijing.myqcloud.com/witch.gltf"
         ></a-asset-item>
         <a-asset-item
           id="bear"
-          src="https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/bear/model.gltf"
+          src="https://gltf-1300099782.cos.ap-beijing.myqcloud.com/bear.gltf"
         ></a-asset-item>
         <a-asset-item
           id="korrigan-wolf"
-          src="https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/korrigan-wolf/model.gltf"
+          src="https://gltf-1300099782.cos.ap-beijing.myqcloud.com/korrigan-wolf.gltf"
         ></a-asset-item>
         <!-- 攻击 -->
         <a-asset-item
           id="druid-attack"
-          src="https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/jack-o-lantern/model.gltf"
+          src="https://gltf-1300099782.cos.ap-beijing.myqcloud.com/jack-o-lantern.gltf"
         ></a-asset-item>
         <a-asset-item
           id="korrigan-hat-attack"
-          src="https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/rock/model.gltf"
+          src="https://gltf-1300099782.cos.ap-beijing.myqcloud.com/rock.gltf"
         ></a-asset-item>
         <a-asset-item
           id="ankou-with-cart-attack"
-          src="https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/star/model.gltf"
+          src="https://gltf-1300099782.cos.ap-beijing.myqcloud.com/star.gltf"
         ></a-asset-item>
         <a-asset-item
           id="witch-attack"
-          src="https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/lightning/model.gltf"
+          src="https://gltf-1300099782.cos.ap-beijing.myqcloud.com/lightning.gltf"
         ></a-asset-item>
         <a-asset-item
           id="bear-attack"
-          src="https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/bomb/model.gltf"
+          src="https://gltf-1300099782.cos.ap-beijing.myqcloud.com/bomb.gltf"
         ></a-asset-item>
         <a-asset-item
           id="korrigan-wolf-attack"
-          src="https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/beach-ball/model.gltf"
+          src="https://gltf-1300099782.cos.ap-beijing.myqcloud.com/beach-ball.gltf"
         ></a-asset-item>
         <!-- 个人武器 -->
         <a-asset-item
           id="weapon"
-          src="https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/blaster/model.gltf"
+          src="https://gltf-1300099782.cos.ap-beijing.myqcloud.com/blaster.gltf"
         ></a-asset-item>
         <!-- 音频 -->
         <audio
@@ -94,18 +95,12 @@
         ></audio>
 
         <!-- <audio
-          src="https://image-1300099782.cos.ap-beijing.myqcloud.com/audio/8335.mp3"
-          autoplay
-          preload
-        ></audio> -->
+      src="https://image-1300099782.cos.ap-beijing.myqcloud.com/audio/8335.mp3"
+      autoplay
+      preload
+    ></audio> -->
       </a-assets>
-      <a-box
-        height="20"
-        width="30"
-        depth="4"
-        position="0 0 -20"
-        src="https://image-1300099782.cos.ap-beijing.myqcloud.com/wall.jpeg"
-      ></a-box>
+      <a-box scale="30 20 4" position="0 0 -20" src="#wallImg"></a-box>
 
       <a-text
         id="start-text"
