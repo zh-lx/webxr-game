@@ -7,6 +7,7 @@ module.exports = {
     path: path.resolve(__dirname, './dist'),
     clean: true,
   },
+  mode: 'development',
   devServer: {
     port: 7000,
     hot: true,
