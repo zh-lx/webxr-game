@@ -14,7 +14,7 @@ export const attack = function (point) {
 
 // 创建攻击实体
 function createAttackEntity(point) {
-  const { newX, newY, newZ } = getDeg(point);
+  const { newX, newY, newZ } = getPosition(point);
   const attackEntity = document.createElement('a-sphere');
   attackEntity.setAttribute('radius', '0.2');
   attackEntity.setAttribute('color', 'red');
@@ -73,8 +73,8 @@ function attackEnemy(enemyEntity) {
   }, AttackDelay);
 }
 
-// 获取子弹初始发射位置的偏移角度
-function getDeg(point) {
+// 获取子弹初始发射位置
+function getPosition(point) {
   const { x, y, z } = point;
   // x, z 平面的角度
   const tanXZ = x / z;
